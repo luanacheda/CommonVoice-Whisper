@@ -3,20 +3,23 @@ import csv
 import whisper
 
 # Load the Whisper model
-model = whisper.load_model("large")  # select the model
+model = whisper.load_model("tiny") # select the model
 
 # Create a list to store the results
 results = []
 
 # Input folder containing audio files
-input_folder = "clips_prova"  # change the input folder
+input_folder = "validated" # change the input folder
 
 # Output CSV file
 desktop_path = os.path.join(os.path.expanduser("~"), "Desktop")
-output_csv = os.path.join(desktop_path, "transcriptions.csv")  # change the output file name
+output_csv = os.path.join(desktop_path, "transcriptions_tiny_1000_validated.csv") # change the name of the file
 
 # Define decoding options with the desired language
 options = whisper.DecodingOptions(language="it")
+
+# Initialize a counter for processed files
+file_counter = 0
 
 # Iterate through audio files in the folder
 for filename in os.listdir(input_folder):
@@ -28,13 +31,21 @@ for filename in os.listdir(input_folder):
         
         # Append the results to the list
         results.append({
-            "AudioFile": filename,
-            "Transcript": transcription["text"]
+            "path": filename,
+            "sentence_transcript": transcription["text"]
         })
+        
+        # Increment the file counter
+        file_counter += 1
+        
+        # Print a message every 100 files
+        if file_counter % 100 == 0:
+            print(f"{file_counter} files processed")
+        
 
 # Write the results to a CSV file
 with open(output_csv, mode="w", newline="", encoding="utf-8") as csv_file:
-    fieldnames = ["AudioFile", "Transcript"]
+    fieldnames = ["path", "sentence_transcript"]
     writer = csv.DictWriter(csv_file, fieldnames=fieldnames)
     
     writer.writeheader()
