@@ -3,17 +3,17 @@ import csv
 import whisper
 
 # Load the Whisper model
-model = whisper.load_model("large")
+model = whisper.load_model("large")  # select the model
 
 # Create a list to store the results
 results = []
 
 # Input folder containing audio files
-input_folder = "clips_prova"
+input_folder = "clips_prova"  # change the input folder
 
 # Output CSV file
 desktop_path = os.path.join(os.path.expanduser("~"), "Desktop")
-output_csv = os.path.join(desktop_path, "transcriptions.csv")
+output_csv = os.path.join(desktop_path, "transcriptions.csv")  # change the output file name
 
 # Define decoding options with the desired language
 options = whisper.DecodingOptions(language="it")
