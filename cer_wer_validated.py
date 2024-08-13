@@ -58,7 +58,7 @@ def cer(reference: List[str], hypothesis: List[str]) -> float:
 
 # Load TSV and CSV files into DataFrames
 golden_standard_df = pd.read_csv('validated.tsv', sep='\t', encoding='utf-8')
-whisper_df = pd.read_csv('transcriptions_large_10_validated.csv', encoding='utf-8')
+whisper_df = pd.read_csv('transcriptions_large_1000_validated.csv', encoding='utf-8')
 
 # Merge the DataFrames on 'path'
 merged_df = pd.merge(golden_standard_df, whisper_df, on='path')
@@ -66,11 +66,11 @@ merged_df = pd.merge(golden_standard_df, whisper_df, on='path')
 output_df = merged_df[['path', 'sentence', 'sentence_transcript']]
 
 # Save to a new CSV file
-output_df.to_csv('merged_sentences_inv.csv', index=False, encoding='utf-8')
+output_df.to_csv('sentences_validated_whisper_gs.csv', index=False, encoding='utf-8')
 
 
 # Load the CSV file into a DataFrame
-df = pd.read_csv('merged_sentences_inv.csv', encoding='utf-8')
+df = pd.read_csv('sentences_validated_whisper_gs.csv', encoding='utf-8')
 
 
 # Define a function to tokenize sentences
@@ -83,9 +83,6 @@ def tokenize_sentence(sentence):
 df['sentence_tokenized'] = df['sentence'].apply(tokenize_sentence)
 df['sentence_transcript_tokenized'] = df['sentence_transcript'].apply(tokenize_sentence)
 
-# Save the DataFrame with tokenized sentences to a new CSV file
-
-print("Tokenized sentences saved to 'merged_sentences_tokenized.csv'.")
 
 
 # Calculate WER for each pair of sentences
@@ -96,10 +93,10 @@ cer_scores = df.apply(lambda row: cer(row['sentence_tokenized'], row['sentence_t
 df['cer'] = df.apply(lambda row: cer(row['sentence_tokenized'], row['sentence_transcript_tokenized']) if row['wer'] > 0 else np.nan, axis=1)
 
 
-
-# Compute average WER
 average_wer = wer_scores.mean()
 average_cer = cer_scores.mean()
+df.at[0, 'average WER'] = average_wer
+df.at[0, 'average CER'] = average_cer
 
 df.to_csv('cer_wer_validated.csv', index=False)
 
