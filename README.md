@@ -2,14 +2,21 @@
 
 How to run:
 
-1 - select 1000 random mp3 audio files (run: take_1000_random_mp3_validated.py and take_1000_random_mp3_invalidated.py)
-This cretaes two new folders containg 1000 rando mp3 files from the Common Voice corpus.
+1 - 
+Python script to select 1000 random mp3 audio files 
+* take_1000_random_mp3_validated.py
+* take_1000_random_mp3_invalidated.py
+To get the result the following files are needed:
+* clips folder with all the mp3 data (downloaded from common voice italian)
+Output:
+* clips_folder_1000_randomized with 1000 mp3 files in it   
+
 
 ## 2 - Whisper Transcripts
 Python script to get the Whisper transcripts - ca. 5 hours:
 * whisper_csv_output.py
 To get the results the following files are needet:
-* mp3 data from common voice (clips folder)
+* 1000 random mp3 files taken from common voice (clips_folder_1000_randomized)
 Output files of the python script:
 * transcriptions_large_1000_invalidated.csv
 * transcriptions_large_1000_validated.csv
