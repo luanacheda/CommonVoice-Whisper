@@ -32,4 +32,6 @@ Python script to get a count of the WER values:
 To get the results the following files are needed
 * cer_wer_invalidated.csv
 * cer_wer_validated.csv
-Output files 
+Output files of the 2 python scripts:
+* count_validated.png
+* count_invalidated.png
