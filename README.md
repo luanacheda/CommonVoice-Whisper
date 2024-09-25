@@ -2,14 +2,16 @@
 
 How to run:
 
-1 - 
+## 1 - Get 1000 random mp3 files from the italian common voice data:
 Python script to select 1000 random mp3 audio files 
 * take_1000_random_mp3_validated.py
 * take_1000_random_mp3_invalidated.py
 To get the result the following files are needed:
 * clips folder with all the mp3 data (downloaded from common voice italian)
 Output:
-* clips_folder_1000_randomized with 1000 mp3 files in it   
+* clips_folder_1000_randomized_invalidated with 1000 invalidated mp3 files in it
+* clips_folder_1000_randomized_validated with 1000 validated mp3 files in it   
+  
 
 
 ## 2 - Whisper Transcripts
