@@ -57,4 +57,4 @@ Output files of the python script:
 * count_validated_wer.png
 * count_validated_cer.png
 * count_invalidated_wer.png
-* * count_invalidated_cer.png
+* count_invalidated_cer.png
